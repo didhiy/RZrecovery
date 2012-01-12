@@ -33,11 +33,11 @@ RECOVERY_API_VERSION := 2
 
 ##generate the recovery version file
 TARGET_DEVICE := $(shell echo $$TARGET_PRODUCT | cut -d '_' -f2)
-RZR_VERSION := "2.1.4"
+RZR_VERSION := "2.1.4-Lilg"
 VERS_STRING := "$(RZR_VERSION)"
 
-SOURCE_HOME := "../../android/system/bootable/recovery"
-DEVICE_HOME := ../../../../$(TARGET_DEVICE)
+SOURCE_HOME := "/home/squadzone/android/system/bootable/recovery"
+DEVICE_HOME := ../../device/samsung/$(TARGET_DEVICE)
 
 ##build the main recovery module
 LOCAL_MODULE := recovery
@@ -50,7 +50,7 @@ LOCAL_STATIC_LIBRARIES += libminzip libunz libmincrypt
 LOCAL_STATIC_LIBRARIES += libminui libpixelflinger_static libpng libcutils
 LOCAL_STATIC_LIBRARIES += libflashutils libmtdutils libmmcutils libbmlutils liberase_image libdump_image libflash_image
 
-BOARD_RECOVERY_DEFINES := BOARD_HAS_NO_SELECT_BUTTON BOARD_HAS_INVERTED_VOLUME BOARD_UMS_LUNFILE
+BOARD_RECOVERY_DEFINES := BOARD_HAS_NO_SELECT_BUTTON BOARD_HAS_INVERTED_VOLUME BOARD_UMS_LUNFILE BOARD_LDPI_RECOVERY
 
 $(foreach board_define,$(BOARD_RECOVERY_DEFINES), \
   $(if $($(board_define)), \
@@ -64,7 +64,7 @@ LOCAL_C_INCLUDES += system/extras/ext4_utils
 include $(BUILD_EXECUTABLE)
 
 ##recovery symlinks
-RECOVERY_LINKS := flash_image dump_image erase_image format mkfs.ext4 mkbootimg unpack_bootimg mkbootfs reboot_android unyaffs keytest compute_size compute_files
+RECOVERY_LINKS := flash_image dump_image erase_image format mkfs.ext4 mkbootimg unpack_bootimg mkbootfs reboot_android unyaffs keytest compute_size list_files freespace compute_files
 RECOVERY_SYMLINKS := $(addprefix $(TARGET_RECOVERY_ROOT_OUT)/sbin/,$(RECOVERY_LINKS))
 $(RECOVERY_SYMLINKS): RECOVERY_BINARY := $(LOCAL_MODULE)
 $(RECOVERY_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
@@ -106,13 +106,13 @@ LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 include $(BUILD_PREBUILT)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := cwm-restore.sh
-LOCAL_MODULE_TAGS := eng
-LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
-LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-include $(BUILD_PREBUILT)
+##include $(CLEAR_VARS)
+##LOCAL_MODULE := cwm-restore.sh
+##LOCAL_MODULE_TAGS := eng
+##LOCAL_MODULE_CLASS := RECOVERY_EXECUTABLES
+##LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
+##LOCAL_SRC_FILES := $(LOCAL_MODULE)
+##include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := compress_nandroid.sh

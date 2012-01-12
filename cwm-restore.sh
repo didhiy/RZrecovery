@@ -46,6 +46,7 @@ if [ ! -z "$image" ]; then
     dest_dir="/boot"
 	format $dest_dir
 	cd $dest_dir
+      unyaffs $NAND_DIR/boot.img
     RTN=`find . | grep -v "boot.img" | wc -l`
     if [ $RTN -le 1 ]; then
       flash_img $dest_dir $NAND_DIR/boot.img

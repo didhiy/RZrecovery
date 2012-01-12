@@ -770,7 +770,7 @@ int compare_string (const void *a, const void *b)
 void prompt_and_wait ()
 {
   char *MENU_HEADERS[] = { "RZRecovery",
-  "by raidzero",
+  "",
   "Port by Squadzone",
   "",
   NULL
@@ -875,6 +875,10 @@ int main (int argc, char **argv)
 	      return compute_size_main(argc, argv);
 	    if (strstr (argv[0], "compute_files") != NULL)
 	      return compute_files_main(argc, argv);
+	    if (strstr (argv[0], "list_files") != NULL)
+              return list_files_main(argc, argv);
+      	    if (strstr (argv[0], "freespace") != NULL)
+              return freespace_main(argc, argv);
 	    //we dont need to keep executing stuff past this point if an embedded function was called 
 	    return 0;
 	  }

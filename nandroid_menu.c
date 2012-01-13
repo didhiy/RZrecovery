@@ -294,6 +294,7 @@ nandroid_adv_r_choose_file (char *filename, char *nandroid_folder)
 			      }
 		    }
 	  }
+	printf("backup chosen: %s\n", filename);
 out:
   for (i = 0; i < total; i++)
 	  {
@@ -493,6 +494,7 @@ show_nandroid_adv_r_menu ()
 	      switch (chosen_item)
 		    {
 		    case 0:
+		      printf("filename: %s\n", filename);
 		      nandroid_native("restore", filename, partitions, show_progress, compress);
 		      break;
 		    case 1:
@@ -535,6 +537,7 @@ show_nandroid_adv_r_menu ()
 	      switch (chosen_item)
 		    {
 		    case 0:
+		      printf("filename: %s\n", filename);
 		      nandroid_native("restore", filename, partitions, show_progress, compress);
 		      break;
 		    case 1:
